@@ -5,13 +5,11 @@ import './Default.css'
 const DefaultLayout =({children}) =>{
     return(
         <>
-
-        <div className="layout">
-            <div id="header">Header</div>
-
+        <div id="header">Header</div>
+        <div id="layout-body" className="layout-body">
             {children}
-            <div id="footer">Footer</div>
         </div>
+        <div id="footer">Footer</div>
         </>
     )
 }
@@ -19,3 +17,8 @@ const DefaultLayout =({children}) =>{
 export default DefaultLayout;
 
 //            <Link to="/recipe?guid=foobar">Foobar Recipe</Link>
+//<div className="layout">
+//<div id="header">Header</div>
+//{children}
+//
+//</div>

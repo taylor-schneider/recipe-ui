@@ -1,0 +1,11 @@
+.version {
+    font-size: 3vh;
+    font-weight: bold;
+    background-color: gray;
+    width: 5vw;
+
+    /* give it an oval shape */
+    -moz-border-radius: 3vh/1vw;
+    -webkit-border-radius: 3vh/1vw;
+    border-radius: 3vh/1vw;
+}

@@ -1,19 +1,26 @@
-#header{
-    position: absolute;
+#header {
+    position: fixed;
     top: 0px;
+    left: 0px;
     height: 10vh;
     width: 100vw;
     background-color: blue;
 }
 
-.layout{
-    height: 100vh;
+#layout-body {
+    position: absolute;
+    top: 10vh;
+    left: 0vh;
+    height: 80vh;
+    width: 100vw;
 }
 
 #footer{
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
     height: 10vh;
     width: 100vw;
     background-color: blue;
 }
+

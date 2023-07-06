@@ -1,5 +1,28 @@
-.recipe {
-    position: absolute;
-    top: 10vh;
-    left: 0vh;
+div.Recipe {
+    height: 100%;
+}
+
+div.Recipe > div.panel-scoller {
+    height: 96%;
+    width: 100%;
+
+    /* Auto scroll snap */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+div.Recipe > div.panel-scoller > div.scroll-panel {
+    height: 100%;
+    scroll-snap-align: start;
+}
+
+div.Recipe > div.panel-scoller > div.SummaryPanel {
+    background-color: aliceblue;
+}
+div.Recipe > div.panel-scoller > div.PreparationPanel {
+    background-color: brown;
+}
+div.Recipe > div.panel-scoller > div.OtherPanel {
+    background-color: orange;
 }

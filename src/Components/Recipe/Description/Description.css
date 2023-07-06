@@ -1,0 +1,8 @@
+div.Description > p {
+    /* supress default css */
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+
+    font-size: 3vh;
+    font-weight: bold;
+}

@@ -1,0 +1,7 @@
+div.Authors > span:nth-child(1) {
+    font-weight: bold;
+}
+div.Authors > span {
+    padding-right: 1vh;
+    font-size: 3vh;
+}

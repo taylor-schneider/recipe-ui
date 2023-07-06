@@ -1,0 +1,20 @@
+div.Rating {
+    width: 100%;
+    height: 4vh;
+    background-color: antiquewhite;
+}
+div.Rating > span > img.star-img {
+    height: 3vh;
+    display: inline-block;
+    vertical-align:middle;
+}
+
+div.Rating > span {
+    font-size: 3vh;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div.Rating > span:nth-child(1){
+    padding-right: 1vw;    
+}
