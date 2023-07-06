@@ -12,7 +12,6 @@ export default function App() {
   return (
     
     <BrowserRouter>
-      <Link to="/recipe?guid=foobar">Foobar Recipe</Link>
       <Routes>
         <Route exact path='/' element={< Home />}></Route>
         <Route exact path='/recipe' element={<Recipe />}></Route>

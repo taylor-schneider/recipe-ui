@@ -1,0 +1,19 @@
+#header{
+    position: absolute;
+    top: 0px;
+    height: 10vh;
+    width: 100vw;
+    background-color: blue;
+}
+
+.layout{
+    height: 100vh;
+}
+
+#footer{
+    position: absolute;
+    bottom: 0;
+    height: 10vh;
+    width: 100vw;
+    background-color: blue;
+}

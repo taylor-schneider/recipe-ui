@@ -1,9 +1,13 @@
 import './Recipe.css';
 import Title from '../../Components/Title/Title'
 import Version from '../../Components/Version/Version'
+import Authors from '../../Components/Authors/Authors'
+import Description from '../../Components/Description/Description';
+import Rating from '../../Components/Rating/Rating'
 import React, { Component } from "react";
 import {useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSearchParams } from 'react-router-dom';
+import DefaultLayout from '../../Layouts/Default/Default';
 
 class Recipe extends Component {
 
@@ -39,13 +43,19 @@ class Recipe extends Component {
   render() {
 
     console.log("render:")
-    console.log(this.state)
+    console.log(this.state.recipe)
 
     return (
-      <div id={this.state.guid} className="recipe">
-        {Title(this.state.recipe.name)}
-        {Version(this.state.recipe.version)}
-      </div>
+      <DefaultLayout>
+        <div id={this.state.guid} className="recipe">
+          {Title(this.state.recipe.name)}
+          {Authors(this.state.recipe.authors)}
+          {Version(this.state.recipe.version)}
+          {Rating(this.state.recipe.rating)}
+          {Description(this.state.recipe.description)}
+
+        </div>
+      </DefaultLayout>
     );
   }
 }
