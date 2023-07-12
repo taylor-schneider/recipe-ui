@@ -3,6 +3,9 @@ import star_img from './star.png'
 
 function Rating(recipe) {
 
+  console.log("star_img")
+  console.log(star_img)
+
   var star_imgs = []
   var reviews = 0
   var reviews_text = ""
