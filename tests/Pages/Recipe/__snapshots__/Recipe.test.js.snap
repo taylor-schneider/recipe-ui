@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`When loading a rating It renders properly 1`] = `
+<div
+  className="Rating"
+>
+  <span>
+    <img
+      className="star-img"
+      src="/public/9261fb9b46f96056791546b787d10669.png"
+    />
+    <img
+      className="star-img"
+      src="/public/9261fb9b46f96056791546b787d10669.png"
+    />
+    <img
+      className="star-img"
+      src="/public/9261fb9b46f96056791546b787d10669.png"
+    />
+    <img
+      className="star-img"
+      src="/public/9261fb9b46f96056791546b787d10669.png"
+    />
+    <img
+      className="star-img"
+      src="/public/9261fb9b46f96056791546b787d10669.png"
+    />
+  </span>
+  <span>
+    (1 Reviews)
+  </span>
+</div>
+`;
