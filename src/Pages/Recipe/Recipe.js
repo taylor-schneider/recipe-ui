@@ -1,7 +1,8 @@
 import './Recipe.css';
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import {useLocation, useNavigate, useParams } from "react-router-dom";
 import DefaultLayout from '../../Layouts/Default/Default';
+
 
 // Import generic contiainers
 import Section from '../../Sections/Section/Section';
@@ -15,6 +16,7 @@ import Description from '../../Components/Recipe/Description/Description'
 import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
 import PanelScroller from '../../Panels/PanelScroller/PanelScroller';
 import SectionScroller from '../../Sections/SectionScroller/SectionScroller';
+import Version from '../../Components/Recipe/Version/Version';
 
 
 class Recipe extends Component {
@@ -48,25 +50,6 @@ class Recipe extends Component {
     return (
       <DefaultLayout>
         <div className="Recipe">
-          <Title recipe={this.state.recipe}/>
-          <PanelScroller>
-            <Panel additional_classes="recipe-panel-1">
-              <SectionScroller>
-                <Section additional_classes='recipe-panel-1-section-1'>
-                  <Rating recipe={this.state.recipe}/>
-                  <Authors recipe={this.state.recipe}/>
-                  <Description recipe={this.state.recipe}/>
-                  <ImageGallery recipe={this.state.recipe}/>
-                </Section>
-                <Section>Hey</Section>
-                <Section>Wait</Section>
-                <Section>I've got a new complain</Section>
-              </SectionScroller>
-            </Panel>
-            <Panel additional_classes="recipe-panel-2">
-              This is panel 2
-            </Panel>
-          </PanelScroller>
         </div>
       </DefaultLayout>
     );

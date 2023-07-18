@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Home from './Pages/Home/Home';
-import Recipe from './Pages/Recipe/Recipe';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 
+/* Import the code for our pages */
+import Home from './Pages/Home/Home';
+import Recipe from './Pages/Recipe/Recipe';
+import GridTest from './Pages/GridTest/GridTest';
 
 
 export default function App() {
@@ -15,6 +17,7 @@ export default function App() {
       <Routes>
         <Route exact path='/' element={< Home />}></Route>
         <Route exact path='/recipe' element={<Recipe />}></Route>
+        <Route exact path='/grid' element={<GridTest />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,15 +1,19 @@
 .Title {
+    min-height: 4vh;
     height: max-content;
 }
 .Title > h1{
+    /* Position relative to parent div */
     position: relative;
     top: 0px;
     padding-top: 0px;
-    padding-bottom: 0px;
 
-    display: inline;
+    font-size: 4vh;
+
+    /* Put some space between the title and version */
     padding-right: 5vh;
 
+    /* Allow version component to be displayed on same level */
     float: left;
 
     /* disable default css */

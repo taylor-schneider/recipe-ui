@@ -7,7 +7,7 @@ const Panel = ({children, additional_classes}) => {
 
     return (
         <>
-        <div className={"Pannel scroll-panel " + additional_classes}>
+        <div className={"Panel scroll-panel " + additional_classes}>
             {children}
         </div>
         </>

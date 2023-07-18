@@ -1,8 +1,10 @@
 .Section {
     height: 100%;
     float: left;
-    border-color: green;
-    border: 10px;
+
+}
+div.scroll-snap-align-start {
+    scroll-snap-align: start;
 }
 
 /* For phone screens */

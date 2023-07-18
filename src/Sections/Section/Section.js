@@ -7,7 +7,7 @@ const Section = ({children, additional_classes}) => {
   console.log(additional_classes)
 
   return (
-    <div className={"Section scroll-section " + additional_classes}>
+    <div className={"Section scroll-snap-align-start " + additional_classes}>
       {children}
     </div>
   );

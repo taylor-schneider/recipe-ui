@@ -1,9 +1,11 @@
-div.section-scoller {
+div.SectionScroller {
     height: 100%;
-    width: 100%;
+    width: 90%;
+    background-color: red;
 
     /* Auto scroll snap */
-    overflow-x: hidden;
+/*    overflow-x: hidden;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+*/
 }
