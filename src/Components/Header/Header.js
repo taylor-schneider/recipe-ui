@@ -27,28 +27,33 @@ const Header = () => {
 
   // Define a function to evlauate scroll events and set our local state
   const controlNavbar = () => {
-    if (typeof window !== 'undefined') { 
-      console.log(window.scrollY)
-      if(window.scrollY == 0){
-        setShow(true);  
-        setCssClass("")
-      }
-      else
-      {
-        let scroll_down = window.scrollY > lastScrollY
-        if (scroll_down) { 
-          setShow(false); 
-          setCssClass("hidden");
-        } 
-        else {
-          setShow(true);  
-          setCssClass("active")
-        }
-      }
-
-      // remember current page location to use in the next move
-      setLastScrollY(window.scrollY); 
+    // IF we dont have a window, dont try anything
+    if (typeof window === 'undefined'){
+      return;
     }
+
+    // If we have again reached the top of the page, remove the dynamic css
+    if(window.scrollY == 0){
+      setShow(true);  
+      setCssClass("");
+      setLastScrollY(window.scrollY); 
+      return;
+    }
+
+    // If we are scrolling and not at the top of the page, setthe dynamic css
+    let scroll_down = window.scrollY > lastScrollY
+    if (scroll_down) { 
+      setShow(false); 
+      setCssClass("hidden");
+    } 
+    else {
+      setShow(true);  
+      setCssClass("active")
+    }
+
+    // remember current page location to use in the next move
+    setLastScrollY(window.scrollY); 
+    
   };
 
   // The useEffect hook like the useState hook is another core hook added
