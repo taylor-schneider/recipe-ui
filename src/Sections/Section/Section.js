@@ -7,7 +7,7 @@ function Section({components}, additional_classes) {
   }
 
   return (
-    <div className={"Section" + additional_classes}>
+    <div className={"Section scroll-section" + additional_classes}>
       {components}
     </div>
   );

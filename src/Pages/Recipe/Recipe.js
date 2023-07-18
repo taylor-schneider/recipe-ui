@@ -55,9 +55,9 @@ class Recipe extends Component {
       ImageGallery(this.state.recipe)
     ]
     var summary_panel_sections = [
-      <Section components={components} additional_classes="summary-panel-section-1"/>
+      Section({components}, "summary-panel-section-1")
     ]
-    var summary_panel = <Panel sections={summary_panel_sections} />
+    var summary_panel = Panel(summary_panel_sections, "summary-panel")
 
     return (
       <DefaultLayout>
