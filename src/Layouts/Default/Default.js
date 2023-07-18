@@ -1,15 +1,19 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import './Default.css'
+
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
+
 
 const DefaultLayout =({children}) =>{
     return(
         <>
-        <div id="header">Header</div>
+        <Header/>
+        <div id="navigation">Navigation</div>
         <div id="layout-body" className="layout-body">
             {children}
         </div>
-        <div id="footer">Footer</div>
+        <Footer />
         </>
     )
 }

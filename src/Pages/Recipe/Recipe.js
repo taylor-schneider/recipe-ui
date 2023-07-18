@@ -50,6 +50,12 @@ class Recipe extends Component {
     return (
       <DefaultLayout>
         <div className="Recipe">
+          <div className="dummy-section">
+            <div className='dummy-content'>Content</div>
+            <div className='dummy-content'>Content</div>
+            <div className='dummy-content'>Content</div>
+            <div className='dummy-content'>Content</div>
+          </div>
         </div>
       </DefaultLayout>
     );

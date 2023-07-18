@@ -1,0 +1,23 @@
+header {
+    height: 4vh;
+    width: 100vw;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+.header-logo {
+    height: 4vh;
+    width: 4vh;
+    background-color: red;
+    float: left;
+}
+
+.active{
+    position: fixed;
+    top: 0vh;
+    transition: 0.3s linear;
+}
+.hidden{
+    display: none;
+    transition: 0.3s linear;
+}

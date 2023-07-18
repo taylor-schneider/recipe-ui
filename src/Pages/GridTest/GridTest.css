@@ -1,27 +1,4 @@
-/* Define the names of the grid areas */
-.main-head {
-    grid-area: header;
-}
-.content {
-    grid-area: content;
-}
-.main-nav {
-    grid-area: nav;
-}
-.main-footer {
-    grid-area: footer;
-}
 
-/* Configure the wrapper as a grid */
-.wrapper {
-    display: grid;
-    gap: 10px;
-    grid-template-areas:
-        "header"
-        "nav"
-        "content"
-        "footer";
-}
 
 /* Define base syles */
 .logo-img {
@@ -30,13 +7,7 @@
     background-color: red;
     float: left;
 }
-header {
-    height: 4vh;
-    width: 100vw;
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-}
+
 
 /* Define gridlayout and style for Cellphones*/
 @media screen and (max-width: 640px){
@@ -47,12 +18,6 @@ header {
             "nav"
             "content"
             "footer"
-    }
-
-    header {
-        position: fixed;
-        top: 0px;
-        transition: top 0.3s;
     }
 
     .Card {

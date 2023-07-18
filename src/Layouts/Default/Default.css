@@ -1,26 +1,61 @@
-#header {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 10vh;
-    width: 100vw;
-    background-color: blue;
+/* Define the names of the grid areas*/
+.header {
+    grid-area: header-area;
+}
+.layout-content {
+    grid-area: content-area;
+}
+.navigation {
+    grid-area: nav-area;
+}
+.footer {
+    grid-area: footer-area;
 }
 
-#layout-body {
-    position: absolute;
-    top: 10vh;
-    left: 0vh;
-    height: 85vh;
-    width: 100vw;
+/* Configure the wrapper as a grid */
+.wrapper {
+    display: grid;
+    gap: 0vh;
+    grid-template-areas:
+        "header-area"
+        "nav-area"
+        "content-area"
+        "footer-area";
 }
 
-#footer{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    height: 5vh;
-    width: 100vw;
-    background-color: blue;
+/* Define gridlayout and style for Cellphones*/
+@media screen and (max-width: 640px){
+    .wrapper{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header-area"
+            "nav-area"
+            "content-area"
+            "footer-area"
+    }
 }
 
+
+/* Define gridlayout and style for Tablets*/
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "header  header"
+        "nav     nav"
+        "content content"
+        "footer  footer";
+    }
+}
+
+/* Define gridlayout and style for Desktops*/
+@media screen and (min-width: 1024px){
+    .wrapper {
+        grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+        grid-template-areas:
+        "header  header  header  header"
+        "nav     nav     nav     nav"
+        "content content content content"
+        "footer  footer  footer  footer";
+    }
+}
