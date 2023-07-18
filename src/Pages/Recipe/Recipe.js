@@ -13,6 +13,7 @@ import Rating from '../../Components/Recipe/Rating/Rating'
 import Authors from '../../Components/Recipe/Authors/Authors'
 import Description from '../../Components/Recipe/Description/Description'
 import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
+import PanelScroller from '../../Panels/PanelScroller/PanelScroller';
 
 
 class Recipe extends Component {
@@ -23,22 +24,17 @@ class Recipe extends Component {
 
   componentDidMount() {
 
-    console.log("These are the props:")
-    console.log(this.props)
+    // Do some logic to extract the uri params
     const search_string = this.props.router.location.search
-    console.log("search string: ")
-    console.log(search_string)
     const queryParams = new URLSearchParams(search_string)
     const guid = queryParams.get("guid")
+    // Determine the url to the api based on the params
     const version = queryParams.get("version")
-
     var recipe_url = "http://127.0.0.1:8008/recipe?guid=" + guid;
     if (version != null){
       recipe_url += "&version=" + version
     }
-
-    console.log("recipe url")
-    console.log(recipe_url)
+    // Query the api for the specified recipe and set the state for the component
     fetch(recipe_url)
       .then(res => res.json())
       .then((recipe) => {
@@ -48,24 +44,20 @@ class Recipe extends Component {
 
   render() {
 
-    var components = [
-      Rating(this.state.recipe),
-      Authors(this.state.recipe),
-      Description(this.state.recipe),
-      ImageGallery(this.state.recipe)
-    ]
-    var summary_panel_sections = [
-      Section({components}, "summary-panel-section-1")
-    ]
-    var summary_panel = Panel(summary_panel_sections, "summary-panel")
-
     return (
       <DefaultLayout>
         <div className="Recipe">
-          {Title(this.state.recipe)}
-          <div className="panel-scoller">
-            {summary_panel}
-          </div>
+          <Title recipe={this.state.recipe}/>
+          <PanelScroller>
+            <Panel additional_classes="recipe-panel-1">
+              <Section additional_classes='recipe-panel-1-section-1'>
+                <Rating recipe={this.state.recipe}/>
+                <Authors recipe={this.state.recipe}/>
+                <Description recipe={this.state.recipe}/>
+                <ImageGallery recipe={this.state.recipe}/>
+              </Section>
+            </Panel>
+          </PanelScroller>
         </div>
       </DefaultLayout>
     );

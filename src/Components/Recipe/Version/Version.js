@@ -1,8 +1,8 @@
 import './Version.css';
 
 function Version(recipe) {
-  console.log("version")
-  console.log(recipe)
+//  console.log("version")
+//  console.log(recipe)
   var contents = null
   if(recipe != null){
     contents = (

@@ -1,6 +1,6 @@
 import './ImageGallery.css';
 
-function ImageGallery(recipe) {
+function ImageGallery({recipe}) {
 
   return (
     <div className="ImageGallery">

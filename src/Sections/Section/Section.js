@@ -1,14 +1,14 @@
 import './Section.css';
 
-function Section({components}, additional_classes) {
+// We use the {} around components because it is an array of components and react doesnt like it
+const Section = ({children, additional_classes}) => {
 
-  if(components == null){
-    return <div>Empty Section</div>
-  }
+  console.log(children)
+  console.log(additional_classes)
 
   return (
-    <div className={"Section scroll-section" + additional_classes}>
-      {components}
+    <div className={"Section scroll-section " + additional_classes}>
+      {children}
     </div>
   );
 }

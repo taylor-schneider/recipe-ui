@@ -1,18 +1,32 @@
-/* For small screens */
-@media screen and (max-width: 320px)
+.Section {
+    height: 100%;
+    float: left;
+    border-color: green;
+    border: 10px;
+}
+
+/* For phone screens */
+@media screen and (max-width: 479px)
 {
     .Section {
         width: 100%;
-        height: 100%;
-        background-color: cadetblue;
+        background-color: yellow;
     }
 }
-/* For normal screens */
-@media (min-width: 320px) and (max-width : 1200px){
+
+/* For tablet screens */
+@media screen and (min-width: 479px) and (max-width: 1024px)
+{
+    .Section {
+        width: 50%;
+        background-color: orange;
+    }   
+}
+
+/* For desktop */
+@media screen and (min-width: 1024px){
     .Section {
         width: 25%;
-        height: 100%;
         background-color: cadetblue;
-        float: left;
     }   
 }

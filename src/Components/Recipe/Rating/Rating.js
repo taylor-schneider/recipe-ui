@@ -1,10 +1,10 @@
 import './Rating.css';
 import star_img from './star.png'
 
-function Rating(recipe) {
+function Rating({recipe}) {
 
-  console.log("star_img")
-  console.log(star_img)
+//  console.log("star_img")
+  console.log(recipe)
 
   var star_imgs = []
   var reviews = 0
@@ -14,7 +14,7 @@ function Rating(recipe) {
 
     // Create the rating image
     for(let i = 0; i < recipe.rating; i++){
-      star_imgs.push(<img className='star-img' src={star_img}></img>)
+      star_imgs.push(<img className='star-img' src={star_img} key={i}></img>)
     }
 
     // Determine how people reviewed the recipe
