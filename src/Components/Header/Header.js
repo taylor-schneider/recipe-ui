@@ -26,7 +26,7 @@ const Header = () => {
 
 
   // Define a function to evlauate scroll events and set our local state
-  const controlNavbar = () => {
+  const scrollEventListener = () => {
     // IF we dont have a window, dont try anything
     if (typeof window === 'undefined'){
       return;
@@ -44,11 +44,11 @@ const Header = () => {
     let scroll_down = window.scrollY > lastScrollY
     if (scroll_down) { 
       setShow(false); 
-      setCssClass("hidden");
+      setCssClass("header-hidden");
     } 
     else {
       setShow(true);  
-      setCssClass("active")
+      setCssClass("header-active")
     }
 
     // remember current page location to use in the next move
@@ -74,11 +74,11 @@ const Header = () => {
 
   // Define our side effect function and cleanup function
   function cleanupScrollEventHandler(){
-    window.removeEventListener('scroll', controlNavbar);
+    window.removeEventListener('scroll', scrollEventListener);
   }
   function handleScrollEvent(){
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+      window.addEventListener('scroll', scrollEventListener);
 
       // cleanup function
       return cleanupScrollEventHandler

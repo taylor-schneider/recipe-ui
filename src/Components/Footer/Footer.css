@@ -5,3 +5,17 @@ footer {
     color: white;
     font-weight: bold;
 }
+
+/* The dynamic css should only work when on a cellphone */
+/* Define gridlayout and style for Cellphones*/
+@media screen and (max-width: 640px){
+    .footer-active{
+        position: fixed;
+        bottom: 0;
+        transition: 0.3s linear;
+    }
+    .footer-hidden{
+        display: none;
+        transition: 0.3s linear;
+    }
+}

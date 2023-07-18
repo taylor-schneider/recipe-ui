@@ -12,11 +12,15 @@ header {
     float: left;
 }
 
-.active{
-    position: fixed;
-    transition: 0.3s linear;
-}
-.hidden{
-    display: none;
-    transition: 0.3s linear;
+/* The dynamic css should only work when on a cellphone */
+/* Define gridlayout and style for Cellphones*/
+@media screen and (max-width: 640px){
+    .header-active{
+        position: fixed;
+        transition: 0.3s linear;
+    }
+    .header-hidden{
+        display: none;
+        transition: 0.3s linear;
+    }
 }
