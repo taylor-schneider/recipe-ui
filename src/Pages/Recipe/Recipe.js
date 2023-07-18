@@ -14,6 +14,7 @@ import Authors from '../../Components/Recipe/Authors/Authors'
 import Description from '../../Components/Recipe/Description/Description'
 import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
 import PanelScroller from '../../Panels/PanelScroller/PanelScroller';
+import SectionScroller from '../../Sections/SectionScroller/SectionScroller';
 
 
 class Recipe extends Component {
@@ -50,12 +51,20 @@ class Recipe extends Component {
           <Title recipe={this.state.recipe}/>
           <PanelScroller>
             <Panel additional_classes="recipe-panel-1">
-              <Section additional_classes='recipe-panel-1-section-1'>
-                <Rating recipe={this.state.recipe}/>
-                <Authors recipe={this.state.recipe}/>
-                <Description recipe={this.state.recipe}/>
-                <ImageGallery recipe={this.state.recipe}/>
-              </Section>
+              <SectionScroller>
+                <Section additional_classes='recipe-panel-1-section-1'>
+                  <Rating recipe={this.state.recipe}/>
+                  <Authors recipe={this.state.recipe}/>
+                  <Description recipe={this.state.recipe}/>
+                  <ImageGallery recipe={this.state.recipe}/>
+                </Section>
+                <Section>Hey</Section>
+                <Section>Wait</Section>
+                <Section>I've got a new complain</Section>
+              </SectionScroller>
+            </Panel>
+            <Panel additional_classes="recipe-panel-2">
+              This is panel 2
             </Panel>
           </PanelScroller>
         </div>

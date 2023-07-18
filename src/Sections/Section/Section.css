@@ -6,7 +6,7 @@
 }
 
 /* For phone screens */
-@media screen and (max-width: 479px)
+@media screen and (max-width: 640px)
 {
     .Section {
         width: 100%;
@@ -15,7 +15,7 @@
 }
 
 /* For tablet screens */
-@media screen and (min-width: 479px) and (max-width: 1024px)
+@media screen and (min-width: 640px) and (max-width: 1024px)
 {
     .Section {
         width: 50%;

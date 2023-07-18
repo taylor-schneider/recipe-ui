@@ -9,3 +9,7 @@ div.scroll-panel {
     height: 100%;
     scroll-snap-align: start;
 }
+
+.recipe-panel-2 {
+    background-color: purple;
+}
