@@ -65,16 +65,23 @@ const Header = () => {
   // This will be called after the component renders. The second argument 
   // is an array, called the dependencies array. This array should include 
   // all of the values that our side effect relies upon.
+  // The final part of performing side effects properly in React is the 
+  // effect cleanup function. Sometimes our side effects need to be shut off
+  // and this is preformed by the cleanup function. To use the cleanup function, 
+  // we need to return a function from within the useEffect function.
+  //
+  // https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/
 
-  // Define our side effect function
+  // Define our side effect function and cleanup function
+  function cleanupScrollEventHandler(){
+    window.removeEventListener('scroll', controlNavbar);
+  }
   function handleScrollEvent(){
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', controlNavbar);
 
       // cleanup function
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
+      return cleanupScrollEventHandler
     }
   }
 
