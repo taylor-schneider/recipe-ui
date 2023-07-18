@@ -2,8 +2,18 @@ import './Recipe.css';
 import React, { Component } from "react";
 import {useLocation, useNavigate, useParams } from "react-router-dom";
 import DefaultLayout from '../../Layouts/Default/Default';
-import RecipeSummaryPanel from '../../Panels/RecipeSummaryPanel/RecipeSummaryPanel';
+
+// Import generic contiainers
+import Section from '../../Sections/Section/Section';
+import Panel from '../../Panels/Panel/Panel';
+
+// Import relevant components
 import Title from '../../Components/Recipe/Title/Title'
+import Rating from '../../Components/Recipe/Rating/Rating'
+import Authors from '../../Components/Recipe/Authors/Authors'
+import Description from '../../Components/Recipe/Description/Description'
+import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
+
 
 class Recipe extends Component {
 
@@ -22,7 +32,7 @@ class Recipe extends Component {
     const guid = queryParams.get("guid")
     const version = queryParams.get("version")
 
-    var recipe_url = "http://127.0.0.1:8080/recipe?guid=" + guid;
+    var recipe_url = "http://127.0.0.1:8008/recipe?guid=" + guid;
     if (version != null){
       recipe_url += "&version=" + version
     }
@@ -38,17 +48,23 @@ class Recipe extends Component {
 
   render() {
 
-    console.log("render:")
-    console.log(this.state.recipe)
+    var components = [
+      Rating(this.state.recipe),
+      Authors(this.state.recipe),
+      Description(this.state.recipe),
+      ImageGallery(this.state.recipe)
+    ]
+    var summary_panel_sections = [
+      <Section components={components} additional_classes="summary-panel-section-1"/>
+    ]
+    var summary_panel = <Panel sections={summary_panel_sections} />
 
     return (
       <DefaultLayout>
         <div className="Recipe">
           {Title(this.state.recipe)}
           <div className="panel-scoller">
-            {RecipeSummaryPanel(this.state.recipe)}
-            <div className="PreparationPanel scroll-panel">This is the preparation panel</div>
-            <div className="OtherPanel scroll-panel">This is the other panel</div>
+            {summary_panel}
           </div>
         </div>
       </DefaultLayout>

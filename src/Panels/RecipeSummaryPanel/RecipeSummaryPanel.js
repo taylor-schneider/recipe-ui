@@ -3,6 +3,9 @@ import Version from '../../Components/Recipe/Version/Version'
 import Authors from '../../Components/Recipe/Authors/Authors'
 import Description from '../../Components/Recipe/Description/Description';
 import Rating from '../../Components/Recipe/Rating/Rating'
+import Section from '../../Sections/Section/Section';
+import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery'
+
 
 function SummaryPanel(recipe) {
   var summary_info = null
@@ -12,14 +15,14 @@ function SummaryPanel(recipe) {
   if(recipe != null){
 
     // Create the info block
-    summary_info = (
-      <div className="SummaryPanel-SummaryInfo">
-        {Rating(recipe)}
-        {Authors(recipe)}
-        {Description(recipe)}
-        <div className="RecipeSummaryImages">Images Go Here</div>
-      </div>
-    )
+    var components = [
+      Rating(recipe),
+      Authors(recipe),
+      Description(recipe),
+      ImageGallery(recipe)
+    ]
+    var summary_section = <Section components={components} additional_classes="recipe-summary-section" />
+
 
     nutrition_info = (
       <div className="RecipeSummaryNutritionInfo">Nutrition Info Goes Here</div>
@@ -28,7 +31,7 @@ function SummaryPanel(recipe) {
 
   return (
     <div className="SummaryPanel scroll-panel">
-      {summary_info}
+      {summary_section}
       {nutrition_info}
     </div>
   );

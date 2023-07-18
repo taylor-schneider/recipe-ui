@@ -1,0 +1,18 @@
+/* For small screens */
+@media screen and (max-width: 320px)
+{
+    .Section {
+        width: 100%;
+        height: 100%;
+        background-color: cadetblue;
+    }
+}
+/* For normal screens */
+@media (min-width: 320px) and (max-width : 1200px){
+    .Section {
+        width: 25%;
+        height: 100%;
+        background-color: cadetblue;
+        float: left;
+    }   
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import Rating from './Rating'
+import Rating from '../../../src/Components/Recipe/Rating/Rating'
 
 describe('<Rating />', () => {
   it('renders', () => {
