@@ -1,32 +1,27 @@
-header {
-    position: relative;
-    top: 0vh;
-    left: 0vw;
-
-    height: 4vh;
-    width: 100%;
-
-    background-color: blue;
+div.Navigation {
+    height: 92vh;
+    width: max-content;
+    max-width: 25vh;
+    background-color: grey;
     color: white;
     font-weight: bold;
-}
-
-.header-logo {
-    height: 4vh ;
-    width: 4vh;
-    background-color: red;
-    float: left;
+    top: 4vh;
 }
 
 /* The dynamic css should only work when on a cellphone */
 /* Define gridlayout and style for Cellphones*/
 @media screen and (max-width: 640px){
-    .header-active{
+    .navigation-active{
         position: fixed;
         transition: 0.3s linear;
     }
-    .header-hidden{
+    .navigation-hidden {
+        width: 2vw !important;
+    }
+    
+    .navigation-hidden * {
         display: none;
         transition: 0.3s linear;
     }
+    
 }

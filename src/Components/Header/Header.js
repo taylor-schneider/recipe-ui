@@ -12,10 +12,6 @@ const Header = () => {
   // is called. 
   // https://blog.logrocket.com/guide-usestate-react
 
-  // Create a stateful variable to control whether the component
-  // should be visible or not
-  const [show, setShow] = useState(false);
-
   // Create a stateful variable to speficy where the scroll position
   // was on the last scroll event
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -34,7 +30,6 @@ const Header = () => {
 
     // If we have again reached the top of the page, remove the dynamic css
     if(window.scrollY == 0){
-      setShow(true);  
       setCssClass("");
       setLastScrollY(window.scrollY); 
       return;
@@ -43,11 +38,9 @@ const Header = () => {
     // If we are scrolling and not at the top of the page, setthe dynamic css
     let scroll_down = window.scrollY > lastScrollY
     if (scroll_down) { 
-      setShow(false); 
       setCssClass("header-hidden");
     } 
     else {
-      setShow(true);  
       setCssClass("header-active")
     }
 

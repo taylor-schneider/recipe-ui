@@ -3,13 +3,13 @@ import './Default.css'
 
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-
+import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel';
 
 const DefaultLayout =({children}) =>{
     return(
         <>
         <Header/>
-        <div id="navigation">Navigation</div>
+        <NavigationPanel/>
         <div id="layout-body" className="layout-body">
             {children}
         </div>
