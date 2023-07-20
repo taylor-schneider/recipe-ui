@@ -1,9 +1,22 @@
 footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+
     height: 4vh;
     width: 100vw;
+
+    z-index: 100;
+
     background-color: blue;
     color: white;
     font-weight: bold;
+
+    display: block;
+}
+
+.footer-text {
+    height: inherit;
 }
 
 /* The dynamic css should only work when on a cellphone */
@@ -11,11 +24,13 @@ footer {
 @media screen and (max-width: 640px){
     .footer-active{
         position: fixed;
-        bottom: 0;
         transition: 0.3s linear;
     }
     .footer-hidden{
-        display: none;
+        display: none !important;
         transition: 0.3s linear;
     }
+}
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+
 }

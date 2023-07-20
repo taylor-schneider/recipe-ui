@@ -72,7 +72,6 @@ const Header = () => {
   function handleScrollEvent(){
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', scrollEventListener);
-
       // cleanup function
       return cleanupScrollEventHandler
     }

@@ -1,27 +1,29 @@
 div.Navigation {
-    height: 92vh;
+    top: 4vh;
+    position: fixed;
+    left: 0vw;
+
+    height: calc(100% - 8vh + 1px);
     width: max-content;
-    max-width: 25vh;
+    max-width: 25%;
+
+    z-index: 50;
+
     background-color: grey;
     color: white;
     font-weight: bold;
-    top: 4vh;
+
+    float: left;
 }
 
-/* The dynamic css should only work when on a cellphone */
-/* Define gridlayout and style for Cellphones*/
-@media screen and (max-width: 640px){
-    .navigation-active{
-        position: fixed;
-        transition: 0.3s linear;
-    }
-    .navigation-hidden {
-        width: 2vw !important;
-    }
-    
-    .navigation-hidden * {
-        display: none;
-        transition: 0.3s linear;
-    }
-    
+.navigation-active{
+    transition: 0.3s linear;
+}
+.navigation-hidden {
+    width: 1vw !important;
+}
+
+.navigation-hidden * {
+    display: none;
+    transition: 0.3s linear;
 }

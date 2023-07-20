@@ -1,11 +1,17 @@
 header {
+    /* put the thing in the right place */
     position: relative;
     top: 0vh;
     left: 0vw;
 
+    /* make sure it shows up if there is an overlap with layout body */
+    z-index: 50;
+
+    /* size it */
     height: 4vh;
     width: 100%;
 
+    /* style it */
     background-color: blue;
     color: white;
     font-weight: bold;

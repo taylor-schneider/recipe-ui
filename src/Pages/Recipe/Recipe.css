@@ -2,7 +2,9 @@ div.Recipe {
     height: 100%;
 }
 .dummy-content {
-    height: 94vh;
-    width: 100vw;
-    background-color: azure;
+    height: 92vh;
+    width: auto;
+    background-color: lightsalmon;
+    position: relative;
+    left: 0px;
 }

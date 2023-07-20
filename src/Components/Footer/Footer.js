@@ -10,11 +10,11 @@ const Header = () => {
   const [cssClass, setCssClass] = useState("")
 
   const scrollEventListener = () => {
+
     // IF we dont have a window, dont try anything
     if (typeof window === 'undefined'){
       return;
     }
-
     // If we have again reached the bottom of the page, remove the dynamic css
     //https://stackoverflow.com/questions/63501757/check-if-user-reached-the-bottom-of-the-page-react
     const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight
