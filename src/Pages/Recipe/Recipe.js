@@ -5,8 +5,8 @@ import DefaultLayout from '../../Layouts/Default/Default';
 
 
 // Import generic contiainers
-import Section from '../../Sections/Section/Section';
-import Panel from '../../Panels/Panel/Panel';
+import ContentSection from '../../Components/ContentSection/ContentSection';
+import ContentContainer from '../../Components/ContentContainer/ContentContainer';
 
 // Import relevant components
 import Title from '../../Components/Recipe/Title/Title'
@@ -50,12 +50,12 @@ class Recipe extends Component {
     return (
       <DefaultLayout>
         <div className="Recipe">
-          <div className="dummy-section">
-            <div className='dummy-content'>Content</div>
-            <div className='dummy-content'>Content</div>
-            <div className='dummy-content'>Content</div>
-            <div className='dummy-content'>Content</div>
-          </div>
+          <ContentSection>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+          </ContentSection>
         </div>
       </DefaultLayout>
     );

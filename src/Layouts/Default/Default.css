@@ -59,9 +59,9 @@ html, body {
     .wrapper {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-        "header-area"
-        "content-area"
-        "footer-area"
+        "header-area header-area"
+        "content-area content-area"
+        "footer-area footer-area"
     }
 }
 
