@@ -14,15 +14,14 @@ import Rating from '../../Components/Recipe/Rating/Rating'
 import Authors from '../../Components/Recipe/Authors/Authors'
 import Description from '../../Components/Recipe/Description/Description'
 import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
-import PanelScroller from '../../Panels/PanelScroller/PanelScroller';
-import SectionScroller from '../../Sections/SectionScroller/SectionScroller';
 import Version from '../../Components/Recipe/Version/Version';
-
+import SaveEditDiscardControl from '../../Components/SaveEditDiscardControl/SaveEditDiscardControl'
 
 class Recipe extends Component {
 
   state = {
-    recipe: {}
+    recipe: {},
+    editMode: false
   };
 
   componentDidMount() {
@@ -45,13 +44,24 @@ class Recipe extends Component {
       });
   }
 
+
+
   render() {
 
+    let expandingPanelComponents = [
+      <SaveEditDiscardControl/>
+    ]
+
     return (
-      <DefaultLayout>
+      <DefaultLayout panelComponents={expandingPanelComponents}>
         <div className="Recipe">
           <ContentSection>
-            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>
+              <Rating recipe={this.state.recipe}/>
+              <Authors recipe={this.state.recipe}/>
+              <Description recipe={this.state.recipe}/>
+              <ImageGallery recipe={this.state.recipe}/>
+            </ContentContainer>
             <ContentContainer>Content</ContentContainer>
             <ContentContainer>Content</ContentContainer>
             <ContentContainer>Content</ContentContainer>

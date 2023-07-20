@@ -1,10 +1,10 @@
-import './NavigationPanel.css';
+import './ExpandingPanel.css';
 import React, { useState, useEffect } from 'react';
 
 // This code is largely copied from the header
 // See that component for code comments etc.
 
-const NavigationPanel = () => {
+const ExpandingPanel = ({children}) => {
 
   // We will look for scroll events and swipe events
 
@@ -82,10 +82,10 @@ const NavigationPanel = () => {
 
     // Handle the events
     if(isRightSwipe) {
-      setCssClass("navigation-visible")
+      setCssClass("ExpandingPanel-visible")
     }
     if(isLeftSwipe) {
-      setCssClass("navigation-hidden")
+      setCssClass("ExpandingPanel-hidden")
     }
   }
 
@@ -103,32 +103,34 @@ const NavigationPanel = () => {
     // Check if this click is less than one second since the previous one
     else {
       let diff = (now - lastClickTime) / 1000
-      if (diff > 1){
+      let threshold = 0.5
+      if (diff > threshold){
         setLastClickTime(now)
         return
       }
     }
     // If we got here, its a double click...
     // Toggle the css
-    if(cssClass == 'navigation-visible'){
-      setCssClass("navigation-hidden")
+    if(cssClass == 'ExpandingPanel-visible'){
+      setCssClass("ExpandingPanel-hidden")
     }
     else {
-      setCssClass("navigation-visible")
+      setCssClass("ExpandingPanel-visible")
     }
     setLastClickTime(null)
   }
   
 
   return (
-    <div className={'Navigation ' + cssClass} 
-          onTouchStart={onTouchStart} 
-          onTouchMove={onTouchMove} 
-          onTouchEnd={onTouchEnd}
-          onClick={onDoubleClick}>
-      <div className='navigation-text'>This is the Navigation</div>
+    <div 
+      className={'ExpandingPanel ' + cssClass} 
+      onTouchStart={onTouchStart} 
+      onTouchMove={onTouchMove} 
+      onTouchEnd={onTouchEnd}
+      onClick={onDoubleClick}>
+        {children}
     </div>
   );
 }
 
-export default NavigationPanel;
+export default ExpandingPanel;

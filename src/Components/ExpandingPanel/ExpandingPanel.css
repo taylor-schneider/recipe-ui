@@ -1,10 +1,11 @@
-div.Navigation {
+div.ExpandingPanel {
     top: 4vh;
     position: fixed;
     left: 0vw;
 
     height: calc(100% - 8vh + 1px);
     width: max-content;
+    min-width: 1vw;
 
     z-index: 50;
 
@@ -15,14 +16,15 @@ div.Navigation {
     float: left;
 }
 
-.navigation-active{
+.ExpandingPanel-active{
     transition: 0.3s linear;
 }
-.navigation-hidden {
+.ExpandingPanel-hidden {
     width: 1vw !important;
 }
 
-.navigation-hidden * {
+/* Dont render the children */
+.ExpandingPanel-hidden * {
     display: none;
     transition: 0.3s linear;
 }
