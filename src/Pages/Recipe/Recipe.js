@@ -5,8 +5,8 @@ import DefaultLayout from '../../Layouts/Default/Default';
 
 
 // Import generic contiainers
-import ContentSection from '../../Components/ContentSection/ContentSection';
-import ContentContainer from '../../Components/ContentContainer/ContentContainer';
+import ContentSection from '../../LayoutObjects/ContentSection/ContentSection';
+import ContentContainer from '../../LayoutObjects/ContentContainer/ContentContainer';
 
 // Import relevant components
 import Title from '../../Components/Recipe/Title/Title'

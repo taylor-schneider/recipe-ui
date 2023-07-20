@@ -1,9 +1,9 @@
 import React from 'react';
 import './Default.css'
 
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
-import ExpandingPanel from '../../Components/ExpandingPanel/ExpandingPanel';
+import Header from '../../LayoutObjects/Header/Header';
+import Footer from '../../LayoutObjects/Footer/Footer';
+import ExpandingPanel from '../../LayoutObjects/ExpandingPanel/ExpandingPanel';
 
 const DefaultLayout =({children, panelComponents}) =>{
     return(
