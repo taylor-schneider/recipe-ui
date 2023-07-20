@@ -78,7 +78,7 @@ const NavigationPanel = () => {
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
-    if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
+    //if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
 
     // Handle the events
     if(isRightSwipe) {
@@ -89,8 +89,43 @@ const NavigationPanel = () => {
     }
   }
 
+  // Define function to handle double clicks
+  const [lastClickTime, setLastClickTime] = useState(null)
+
+  const onDoubleClick = (event) => {
+    
+    // Check if we have had a click before
+    let now = Date.now()
+    if (lastClickTime == null){
+      setLastClickTime(now)
+      return
+    }
+    // Check if this click is less than one second since the previous one
+    else {
+      let diff = (now - lastClickTime) / 1000
+      if (diff > 1){
+        setLastClickTime(now)
+        return
+      }
+    }
+    // If we got here, its a double click...
+    // Toggle the css
+    if(cssClass == 'navigation-visible'){
+      setCssClass("navigation-hidden")
+    }
+    else {
+      setCssClass("navigation-visible")
+    }
+    setLastClickTime(null)
+  }
+  
+
   return (
-    <div className={'Navigation ' + cssClass} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+    <div className={'Navigation ' + cssClass} 
+          onTouchStart={onTouchStart} 
+          onTouchMove={onTouchMove} 
+          onTouchEnd={onTouchEnd}
+          onClick={onDoubleClick}>
       <div className='navigation-text'>This is the Navigation</div>
     </div>
   );
