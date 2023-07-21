@@ -38,4 +38,4 @@ function Rating({recipe}) {
   );
 }
 
-export default Rating;
+export default Rating;     
