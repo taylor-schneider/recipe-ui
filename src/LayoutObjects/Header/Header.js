@@ -2,7 +2,7 @@ import './Header.css';
 import React, { useState, useEffect } from 'react';
 
 
-const Header = () => {
+const Header = ({children}) => {
 
   // useState is React Hook that allows you to add state to a 
   // functional component. It returns an array with two values: 
@@ -82,8 +82,7 @@ const Header = () => {
 
   return (
     <header className={cssClass}>
-      <div className='header-logo'></div>
-      <div className='header-text'>This is the header</div>
+      {children}
     </header>
   );
 }

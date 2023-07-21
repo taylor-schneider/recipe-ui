@@ -8,21 +8,15 @@ header {
     z-index: 50;
 
     /* size it */
-    height: 4vh;
     width: 100%;
+    height: max-content;
+    background-color: green;
 
-    /* style it */
-    background-color: blue;
-    color: white;
-    font-weight: bold;
+    display: flex;
 }
 
-.header-logo {
-    height: 4vh ;
-    width: 4vh;
-    background-color: red;
-    float: left;
-}
+
+
 
 /* The dynamic css should only work when on a cellphone */
 /* Define gridlayout and style for Cellphones*/

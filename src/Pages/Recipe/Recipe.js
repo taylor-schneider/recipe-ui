@@ -16,6 +16,7 @@ import Description from '../../Components/Recipe/Description/Description'
 import ImageGallery from '../../Components/Recipe/ImageGallery/ImageGallery';
 import Version from '../../Components/Recipe/Version/Version';
 import SaveEditDiscardControl from '../../Components/SaveEditDiscardControl/SaveEditDiscardControl'
+import RecipeHeader from '../../Components/Recipe/RecipeHeader/RecipeHeader';
 
 class Recipe extends Component {
 
@@ -49,12 +50,15 @@ class Recipe extends Component {
   render() {
 
     let expandingPanelComponents = [
-      <SaveEditDiscardControl/>
+      <SaveEditDiscardControl key='foo'/>
+    ]
+    let headerComponents = [
+      <RecipeHeader key='bar'recipe={this.state.recipe}/>
     ]
 
     return (
-      <DefaultLayout panelComponents={expandingPanelComponents}>
-        <div className="Recipe">
+      <DefaultLayout headerComponents={headerComponents} panelComponents={expandingPanelComponents}>
+		    <div className="Recipe">
           <ContentSection>
             <ContentContainer>
               <Rating recipe={this.state.recipe}/>

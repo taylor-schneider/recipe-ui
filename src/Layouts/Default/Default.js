@@ -5,10 +5,12 @@ import Header from '../../LayoutObjects/Header/Header';
 import Footer from '../../LayoutObjects/Footer/Footer';
 import ExpandingPanel from '../../LayoutObjects/ExpandingPanel/ExpandingPanel';
 
-const DefaultLayout =({children, panelComponents}) =>{
+const DefaultLayout =({children, headerComponents, panelComponents}) =>{
     return(
         <>
-        <Header/>
+        <Header>
+            {headerComponents}
+        </Header>
         <ExpandingPanel>
             {panelComponents}
         </ExpandingPanel>
@@ -18,7 +20,8 @@ const DefaultLayout =({children, panelComponents}) =>{
         <Footer />
         </>
     )
-}
+}   
+
 
 export default DefaultLayout;
 

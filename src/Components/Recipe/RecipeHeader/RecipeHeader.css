@@ -1,0 +1,24 @@
+div.RecipeHeader {
+    width: 100%;
+    display: flex;
+}
+div.header-logo {
+    background-color: red;
+    /* see js code for dynamic css 
+    The height and width are set based on the height of the text div
+    */
+    height: 4vh;
+    width: 4vh;
+
+}
+div.header-text {
+    position: relative;
+    height: max-content;
+    min-height: 4vh;
+
+    /* style */
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+
+}

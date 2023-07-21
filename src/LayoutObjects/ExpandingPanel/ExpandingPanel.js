@@ -57,7 +57,7 @@ const ExpandingPanel = ({children}) => {
   // https://stackoverflow.com/questions/70612769/how-do-i-recognize-swipe-events-in-react
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
-  const [cssClass, setCssClass] = useState("")
+  const [cssClass, setCssClass] = useState("ExpandingPanel-visible")
 
   // the required distance between touchStart and touchEnd to be detected as a swipe
   const minSwipeDistance = 50 
@@ -104,9 +104,13 @@ const ExpandingPanel = ({children}) => {
     else {
       let diff = (now - lastClickTime) / 1000
       let threshold = 0.5
-      if (diff > threshold){
+      if (diff < threshold){
         setLastClickTime(now)
-        return
+      }
+      else
+      {
+        console.log("too slow")
+        console.log(diff)
       }
     }
     // If we got here, its a double click...
