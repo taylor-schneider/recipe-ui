@@ -69,6 +69,13 @@ class Recipe extends Component {
             <ContentContainer>Content</ContentContainer>
             <ContentContainer>Content</ContentContainer>
             <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <div className='ContentContainer' style={{height: '8vh', 'background-color': 'orange'}}>
+              This is a hack to make the snap scroll work...
+            </div>
           </ContentSection>
         </div>
       </DefaultLayout>
