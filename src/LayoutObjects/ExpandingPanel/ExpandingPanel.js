@@ -1,111 +1,83 @@
 import './ExpandingPanel.css';
-import React, { useState, useEffect } from 'react';
+import React, { setState } from 'react';
+import ObserverComponent from '../../Components/ObserverComponent';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import { object } from 'prop-types';
 
-// This code is largely copied from the header
-// See that component for code comments etc.
+// I used the following article to understand how swiping works
+// https://stackoverflow.com/questions/70612769/how-do-i-recognize-swipe-events-in-react
 
-const ExpandingPanel = ({children}) => {
+class ExpandingPanel extends ObserverComponent {
 
-  // We will look for scroll events and swipe events
+  constructor(props){
+    super(props)
 
-  /*
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [cssClass, setCssClass] = useState("")
-
-  const scrollEventListener = () => {
-    // IF we dont have a window, dont try anything
-    if (typeof window === 'undefined'){
-      return;
+    this.state = {
+      // State related to swiping
+      touchStart: null,
+      touchEnd: null,
+      minSwipeDistance: 50,
+      // State related to double clicking
+      lastClickTime: null,
+      // The css class attached when panel (shown by default)
+      cssClass: "ExpandingPanel-visible",
+      // The inline css attached to the component when header is resized
+      headerHeight: 0,
+      footerHeight: 0,
+      inlineCss: {}
     }
 
-    // If we have again reached the bottom of the page, remove the dynamic css
-    //https://stackoverflow.com/questions/63501757/check-if-user-reached-the-bottom-of-the-page-react
-    const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight
-    if(bottom){
-      setCssClass("");
-      setLastScrollY(window.scrollY); 
-      return;
-    }
-
-    // If we are scrolling and not at the top of the page, setthe dynamic css
-    let scroll_down = window.scrollY > lastScrollY
-    if (scroll_down) { 
-      setCssClass("navigation-hidden");
-    } 
-    else {
-      setCssClass("navigation-active")
-    }
-
-    // remember current page location to use in the next move
-    setLastScrollY(window.scrollY); 
-    
-  };
-  function cleanupScrollEventHandler(){
-    window.removeEventListener('scroll', scrollEventListener);
-  }
-  function handleScrollEvent(){
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', scrollEventListener);
-
-      // cleanup function
-      return cleanupScrollEventHandler
-    }
-  }
-  useEffect(handleScrollEvent, [lastScrollY]);
-  */
-
-  // https://stackoverflow.com/questions/70612769/how-do-i-recognize-swipe-events-in-react
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-  const [cssClass, setCssClass] = useState("ExpandingPanel-visible")
-
-  // the required distance between touchStart and touchEnd to be detected as a swipe
-  const minSwipeDistance = 50 
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
-    setTouchStart(e.targetTouches[0].clientX)
+    this.onTouchStart = this.onTouchStart.bind(this)
+    this.onTouchMove = this.onTouchMove.bind(this)
+    this.onTouchEnd = this.onTouchEnd.bind(this)
+    this.onDoubleClick = this.onDoubleClick.bind(this)
   }
 
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
 
-  const onTouchEnd = () => {
+  onTouchStart(e) {
+    this.setState({touchEnd: null}) // otherwise the swipe is fired even with usual touch events
+    this.setState({touchStart: e.targetTouches[0].clientX})
+  }
+
+  onTouchMove(e){
+    this.setState({touchEnd: e.targetTouches[0].clientX})
+  }
+
+  onTouchEnd(e){
     // Do nothing if...
-    if (!touchStart || !touchEnd) {
+    if (!this.state.touchStart || !this.state.touchEnd) {
       return
     }
     // Determine what type of swipe has occurred
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
+    const distance = this.state.touchStart - this.state.touchEnd
+    const isLeftSwipe = distance > this.state.minSwipeDistance
+    const isRightSwipe = distance < - this.state.minSwipeDistance
     //if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
 
     // Handle the events
     if(isRightSwipe) {
-      setCssClass("ExpandingPanel-visible")
+      this.setState({cssClass: "ExpandingPanel-visible"})
     }
     if(isLeftSwipe) {
-      setCssClass("ExpandingPanel-hidden")
+      this.setState({cssClass: "ExpandingPanel-hidden"})
     }
   }
 
-  // Define function to handle double clicks
-  const [lastClickTime, setLastClickTime] = useState(null)
-
-  const onDoubleClick = (event) => {
+  onDoubleClick(e) {
     
     // Check if we have had a click before
     let now = Date.now()
-    if (lastClickTime == null){
-      setLastClickTime(now)
+    if (this.state.lastClickTime == null){
+      this.setState({lastClickTime: now})
       return
     }
     // Check if this click is less than one second since the previous one
     else {
-      let diff = (now - lastClickTime) / 1000
+      let diff = (now - this.state.lastClickTime) / 1000
       let threshold = 0.5
       if (diff < threshold){
-        setLastClickTime(now)
+        this.setState({lastClickTime: now})
       }
       else
       {
@@ -115,26 +87,51 @@ const ExpandingPanel = ({children}) => {
     }
     // If we got here, its a double click...
     // Toggle the css
-    if(cssClass == 'ExpandingPanel-visible'){
-      setCssClass("ExpandingPanel-hidden")
+    if(this.state.cssClass == 'ExpandingPanel-visible'){
+      this.setState({cssClass: "ExpandingPanel-hidden"})
     }
     else {
-      setCssClass("ExpandingPanel-visible")
+      this.setState({cssClass: "ExpandingPanel-visible"})
     }
-    setLastClickTime(null)
+    this.setState({lastClickTime: null})
   }
   
 
-  return (
-    <div 
-      className={'ExpandingPanel ' + cssClass} 
-      onTouchStart={onTouchStart} 
-      onTouchMove={onTouchMove} 
-      onTouchEnd={onTouchEnd}
-      onClick={onDoubleClick}>
-        {children}
-    </div>
-  );
+  observeUpdate(sender, state){
+//    console.log(sender,state)
+    if(sender instanceof  Header){
+      this.state.headerHeight = state.clientHeight
+    }
+    if(sender instanceof Footer){
+      this.state.footerHeight = state.clientHeight
+    }
+    let vh100 = window.innerHeight
+//    console.log(vh100)
+//    console.log(this.state.headerHeight)
+//    console.log(this.state.footerHeight)
+
+    let height = vh100 - this.state.headerHeight - this.state.footerHeight
+    this.state.inlineCss = {
+      top: this.state.headerHeight + "px",
+      height: height + "px"
+    }
+//    console.log(this.state.inlineCss)
+  }
+
+  render(){
+//    console.log(this.state.inlineCss)
+    return (
+      <div 
+        className={'ExpandingPanel ' + this.state.cssClass} 
+        onTouchStart={this.onTouchStart} 
+        onTouchMove={this.onTouchMove} 
+        onTouchEnd={this.onTouchEnd}
+        onClick={this.onDoubleClick}
+        style={this.state.inlineCss}>
+          {this.props.children}
+      </div>
+    );
+  }
 }
 
 export default ExpandingPanel;

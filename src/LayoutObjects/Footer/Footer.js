@@ -1,15 +1,24 @@
 import './Footer.css';
-import React, { useState, useEffect } from 'react';
-
+import React, { setState } from 'react';
+import ObserverComponent from '../../Components/ObserverComponent';
 // This code is largely copied from the header
 // See that component for code comments etc.
 
-const Header = () => {
+class Footer extends ObserverComponent{
 
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [cssClass, setCssClass] = useState("")
+  constructor(props){
+    super(props)
 
-  const scrollEventListener = () => {
+    this.state = {
+      lastScrollY: 0,
+      cssClass: "",
+      ref: React.createRef()
+    }
+
+    window.addEventListener('scroll', this.scrollEventListener);
+  }
+
+  scrollEventListener(){
 
     // IF we dont have a window, dont try anything
     if (typeof window === 'undefined'){
@@ -19,42 +28,37 @@ const Header = () => {
     //https://stackoverflow.com/questions/63501757/check-if-user-reached-the-bottom-of-the-page-react
     const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight
     if(bottom){
-      setCssClass("");
-      setLastScrollY(window.scrollY); 
+      this.setState({cssClass: ""});
+      this.setState({lastScrollY: window.scrollY}); 
       return;
     }
 
     // If we are scrolling and not at the top of the page, setthe dynamic css
-    let scroll_up = window.scrollY < lastScrollY
+    let scroll_up = window.scrollY < this.state.lastScrollY
     if (scroll_up) { 
-      setCssClass("footer-hidden");
+      this.setState({cssClass: "Footer-hidden"});
     } 
     else {
-      setCssClass("footer-active")
+      this.setState({cssClass: "Footer-active"})
     }
 
     // remember current page location to use in the next move
-    setLastScrollY(window.scrollY); 
+    this.setState({lastScrollY: window.scrollY}); 
     
   };
-  function cleanupScrollEventHandler(){
-    window.removeEventListener('scroll', scrollEventListener);
-  }
-  function handleScrollEvent(){
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', scrollEventListener);
 
-      // cleanup function
-      return cleanupScrollEventHandler
+  componentDidMount(){
+    let currentHeight = this.state.ref.current.clientHeight
+    this.sendUpdate({clientHeight: currentHeight})
+  }
+  
+  render(){
+    return (
+      <div ref={this.state.ref} className={"Footer " +this.state.cssClass}>
+        <div className='Footer-text'>This is the footer</div>
+      </div>
+    );
     }
-  }
-  useEffect(handleScrollEvent, [lastScrollY]);
-
-  return (
-    <footer className={cssClass}>
-      <div className='footer-text'>This is the footer</div>
-    </footer>
-  );
 }
 
-export default Header;
+export default Footer;

@@ -8,7 +8,7 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Recipe from './Pages/Recipe/Recipe';
 import GridTest from './Pages/GridTest/GridTest';
-
+import Test from './Pages/Test/Test'
 
 export default function App() {
   return (
@@ -18,6 +18,8 @@ export default function App() {
         <Route exact path='/' element={< Home />}></Route>
         <Route exact path='/recipe' element={<Recipe />}></Route>
         <Route exact path='/grid' element={<GridTest />}></Route>
+        <Route exact path='/test' element={<Test />}></Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,7 @@
 div.ExpandingPanel {
-    top: 4vh;
     position: fixed;
     left: 0vw;
 
-    height: calc(100% - 8vh + 1px);
     width: max-content;
     min-width: 1vw;
 

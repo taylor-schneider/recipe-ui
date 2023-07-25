@@ -1,58 +1,65 @@
 import './RecipeHeader.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { setState, Component } from 'react';
 
 
-function RecipeHeader({recipe}) {
+class RecipeHeader extends Component {
   
-  // Wire up some side-effect to automatically adjust the css for this component
-  const [headerTextHeight, setHeaderTextHeight] = useState(0)
-  const [headerInlineStyle, setHeaderInlineStyle] = useState({})
-  const ref = useRef(null)
-
-  const setCss = () => {
-
-    setHeaderTextHeight(ref.current.clientHeight)
-
-    setHeaderInlineStyle({
-      height: ref.current.clientHeight + 'px',
-      width: ref.current.clientHeight + 'px',
-      'max-height': ref.current.clientHeight + 'px',
-      'max-width': ref.current.clientHeight + 'px',
-      'min-height': ref.current.clientHeight + 'px',
-      'min-width': ref.current.clientHeight + 'px',
-    })
-  }
-
-  const eventListener = () => {
-    
-    if (typeof window === 'undefined'){
-      return;
+  constructor(props){
+    super(props)
+    this.state = {
+      headerTextHeight: 0,
+      headerInlineStyle: {},
+      ref: React.createRef(null),
+      ResizeObserver: null
     }
+    this.resizeEventListener = this.resizeEventListener.bind(this)
+  }
+
+  resizeEventListener(){
+
+    this.setState({headerTextHeight: this.state.ref.current.clientHeight})
+
+    this.setState({headerInlineStyle: {
+      height: this.state.ref.current.clientHeight + 'px',
+      width: this.state.ref.current.clientHeight + 'px',
+      'maxHeight': this.state.ref.current.clientHeight + 'px',
+      'maxWidth': this.state.ref.current.clientHeight + 'px',
+      'minHeight': this.state.ref.current.clientHeight + 'px',
+      'minWidth': this.state.ref.current.clientHeight + 'px',
+    }})
     
-    setCss()
-  }
-  function cleanupEventHandler(){
-    window.removeEventListener('resize', eventListener);
-  }
-  function handleEvent(){
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', eventListener);
-      // cleanup function
-      return cleanupEventHandler
-    }
   }
 
-  // Wire up the side effect
-  useEffect(handleEvent, [headerTextHeight]);
+  componentDidMount(){
+    
+    // If we resize the window we will want to resize our component
+    window.addEventListener('resize', this.resizeEventListener);
 
-  return (
-    <div className="RecipeHeader" >
-      <div className='header-logo' style={headerInlineStyle}></div>
-      <div className="header-text" ref={ref}>
-        {recipe.name + " (" + recipe.version + ")"}
+    // We also need some magic to detect when the compnent itself resizes
+    // Note: There if text is longer than the screen, the component
+    // will change after the render...
+    //
+    // https://stackoverflow.com/questions/56941843/using-resizeobserver-in-react-class-component
+    this.state.resizeObserver = new ResizeObserver((entries) => {
+      console.log("boosh")
+      this.resizeEventListener()
+
+    });
+    this.state.resizeObserver.observe(this.state.ref.current);
+  }
+
+
+  render(){
+
+    return (
+      <div className="RecipeHeader" >
+        <div className='header-logo' style={this.state.headerInlineStyle}></div>
+        <div className="header-text" ref={this.state.ref} onLoad={this.onLoad}>
+          {this.props.recipe.name + " (" + this.props.recipe.version + ")"}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default RecipeHeader;

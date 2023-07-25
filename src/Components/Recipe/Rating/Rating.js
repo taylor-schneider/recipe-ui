@@ -4,7 +4,6 @@ import star_img from './star.png'
 function Rating({recipe}) {
 
 //  console.log("star_img")
-  console.log(recipe)
 
   var star_imgs = []
   var reviews = 0

@@ -1,4 +1,4 @@
-footer {
+.Footer {
     position: absolute;
     left: 0px;
     bottom: 0px;
@@ -15,18 +15,18 @@ footer {
     display: block;
 }
 
-.footer-text {
+.Footer-text {
     height: inherit;
 }
 
 /* The dynamic css should only work when on a cellphone */
 /* Define gridlayout and style for Cellphones*/
 @media screen and (max-width: 640px){
-    .footer-active{
+    .Footer-active{
         position: fixed;
         transition: 0.3s linear;
     }
-    .footer-hidden{
+    .Footer-hidden{
         display: none !important;
         transition: 0.3s linear;
     }

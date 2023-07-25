@@ -4,22 +4,33 @@ import './Default.css'
 import Header from '../../LayoutObjects/Header/Header';
 import Footer from '../../LayoutObjects/Footer/Footer';
 import ExpandingPanel from '../../LayoutObjects/ExpandingPanel/ExpandingPanel';
+import {Component} from 'react'
 
-const DefaultLayout =({children, headerComponents, panelComponents}) =>{
-    return(
-        <>
-        <Header>
-            {headerComponents}
-        </Header>
-        <ExpandingPanel>
-            {panelComponents}
-        </ExpandingPanel>
-        <div id="layout-body" className="layout-body">
-            {children}
-        </div>
-        <Footer />
-        </>
-    )
+
+// =({children, headerComponents, panelComponents}) =>
+
+class DefaultLayout extends Component {
+
+    constructor(props){
+        super(props)
+    }
+
+    render(){
+        return(
+            <>
+            <Header>
+                {this.props.headerComponents}
+            </Header>
+            <ExpandingPanel>
+                {this.props.panelComponents}
+            </ExpandingPanel>
+            <div id="layout-body" className="layout-body">
+                {this.props.children}
+            </div>
+            <Footer />
+            </>
+        )
+    }
 }   
 
 
