@@ -1,45 +1,58 @@
 import './SaveEditDiscardControl.css';
-import React, { useState, useEffect } from 'react';
+import React, { setState } from 'react';
+import ObserverComponent from '../ObserverComponent';
 
+class SaveEditDiscardControl extends ObserverComponent {
 
-const SaveEditDiscardControl = () => {
+  constructor(props){
+    super(props)
 
-  const [editMode, setEditMode] = useState(false)
+    this.state = {
+      editMode: false
+    }
 
-  const onEditButtonClick = (event) => {
+    this.onEditButtonClick = this.onEditButtonClick.bind(this)
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this)
+    this.onDiscardButtonClick = this.onDiscardButtonClick.bind(this)
+
+  }
+
+  onEditButtonClick(event){
     // Prevent the button click from bubbling up to other controls
     // Looking for click events
     // https://stackoverflow.com/questions/38619981/how-can-i-prevent-event-bubbling-in-nested-react-components-on-click
     event.nativeEvent.stopImmediatePropagation();
 
-    setEditMode(true)
+    this.setState({editMode: true})
   };
 
-  const onSaveButtonClick = (event) => {
+  onSaveButtonClick(event){
     event.nativeEvent.stopImmediatePropagation();
     let choseYes = window.confirm("Are you sure you want to save this as a new version?")
     if(choseYes){
       alert("Saved!")
     }
-    setEditMode(false)
+    this.setState({editMode: false})
   };
 
-  const onDiscardButtonClick = (event) => {
+  onDiscardButtonClick(event){
     event.nativeEvent.stopImmediatePropagation();
     let choseYes = window.confirm("Are you sure you want to discard the changes and revert to the previous version?")
     if(choseYes){
       alert("Discarded!")
     }
-    setEditMode(false)
+    this.setState({editMode: false})
   };
 
-  return (
-    <div className="SaveEitDiscardControl">
-      <button disabled={editMode} onClick={onEditButtonClick}>Edit</button>
-      <button disabled={! editMode} onClick={onSaveButtonClick}>Save</button>
-      <button disabled={! editMode} onClick={onDiscardButtonClick}>Discard</button>
-    </div>
-  );
+  render(){
+    return (
+      <div className="SaveEitDiscardControl">
+        <button disabled={this.state.editMode} onClick={this.onEditButtonClick}>Edit</button>
+        <button disabled={! this.state.editMode} onClick={this.onSaveButtonClick}>Save</button>
+        <button disabled={! this.state.editMode} onClick={this.onDiscardButtonClick}>Discard</button>
+      </div>
+    );
+  }
 }
 
 export default SaveEditDiscardControl;
