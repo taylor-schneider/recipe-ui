@@ -59,7 +59,24 @@ class Recipe extends Component {
     return (
       <DefaultLayout headerComponents={headerComponents} panelComponents={expandingPanelComponents}>
 		    <div className="Recipe">
-          
+          <ContentSection>
+            <ContentContainer>
+              <Rating recipe={this.state.recipe}/>
+              <Authors recipe={this.state.recipe}/>
+              <Description recipe={this.state.recipe}/>
+              <ImageGallery recipe={this.state.recipe}/>
+            </ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <ContentContainer>Content</ContentContainer>
+            <div className='ContentContainer' style={{height: '8vh', 'backgroundColor': 'orange'}}>
+              This is a hack to make the snap scroll work...
+            </div>
+          </ContentSection>
         </div>
       </DefaultLayout>
     );
