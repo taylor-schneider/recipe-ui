@@ -4,6 +4,8 @@ import ObserverComponent from '../../Components/ObserverComponent';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { object } from 'prop-types';
+import { flushSync } from 'react-dom';
+
 
 // I used the following article to understand how swiping works
 // https://stackoverflow.com/questions/70612769/how-do-i-recognize-swipe-events-in-react
@@ -35,8 +37,8 @@ class ExpandingPanel extends ObserverComponent {
     this.onTouchEnd = this.onTouchEnd.bind(this)
     this.onDoubleClick = this.onDoubleClick.bind(this)
     this.observeUpdate = this.observeUpdate.bind(this)
+    this.deselectAll = this.deselectAll.bind(this)
   }
-
 
   onTouchStart(e) {
     this.setState({touchEnd: null}) // otherwise the swipe is fired even with usual touch events
@@ -67,6 +69,17 @@ class ExpandingPanel extends ObserverComponent {
     }
   }
 
+  deselectAll(){
+    // By default, the doubleclick will also select
+    // We want to unselect all selected stuff
+    if (window.getSelection){
+      window.getSelection().removeAllRanges();
+    }
+    else if (document.selection){
+      document.selection.empty();
+    }
+  }
+
   onDoubleClick(e) {
     
     // Check if we have had a click before
@@ -80,7 +93,6 @@ class ExpandingPanel extends ObserverComponent {
     // If it's not, update the var and return
     else {
       let diff = (now - this.state.lastClickTime) / 1000
-      console.log(diff)
 
       let threshold = 0.5
       if (diff > threshold){
@@ -97,33 +109,49 @@ class ExpandingPanel extends ObserverComponent {
       this.setState({cssClass: "ExpandingPanel-visible"})
     }
     this.setState({lastClickTime: null})
-    console.log("doubleclick")
+
+    this.deselectAll()
   }
   
-
   observeUpdate(sender, state){
 
-    // Pull out any information that is relevant
-    if(sender instanceof  Header){
-      this.setState({headerHeight: state.clientHeight})
-    }
-    else if(sender instanceof Footer){
-      this.setState({footerHeight: state.clientHeight})
-    }
-    else {
+    // Ignore updates we dont care about
+    if( ! sender instanceof Header && ! sender instanceof Footer)
+    {
       return
     }
 
-    // Update the inline css with the new values
-    let vh100 = window.innerHeight
-    let newHeight = vh100 - this.state.headerHeight - this.state.footerHeight
+    // The setState function is async and react batches
+    // So the display does not get updates correctly
+    // We force the update with flushSync
 
-    this.setState({
-      inlineCss: {
+    flushSync(() => {
+
+      // Pull out any information that is relevant
+      if(sender instanceof  Header){
+        this.setState({headerHeight: state.clientHeight})
+      }
+      else if(sender instanceof Footer){
+        this.setState({footerHeight: state.clientHeight})
+      }
+    })
+
+    flushSync(() => {
+
+      // Update the inline css with the new values
+      let vh100 = window.innerHeight
+      let newHeight = vh100 - this.state.headerHeight - this.state.footerHeight
+      let inlineCss = {
         top: this.state.headerHeight + "px",
         height: newHeight + "px"
       }
+      this.setState({
+        inlineCss: inlineCss
+      })
     })
+
+
+
   }
 
   render(){
