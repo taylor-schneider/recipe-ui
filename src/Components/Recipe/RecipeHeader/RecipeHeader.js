@@ -4,13 +4,15 @@ import React, { setState, Component } from 'react';
 
 class RecipeHeader extends Component {
   
+  ResizeObserver = null
+
   constructor(props){
     super(props)
     this.state = {
       headerTextHeight: 0,
       headerInlineStyle: {},
       ref: React.createRef(null),
-      ResizeObserver: null
+      
     }
     this.resizeEventListener = this.resizeEventListener.bind(this)
   }
@@ -40,12 +42,11 @@ class RecipeHeader extends Component {
     // will change after the render...
     //
     // https://stackoverflow.com/questions/56941843/using-resizeobserver-in-react-class-component
-    this.state.resizeObserver = new ResizeObserver((entries) => {
-      console.log("boosh")
+    this.resizeObserver = new ResizeObserver((entries) => {
       this.resizeEventListener()
 
     });
-    this.state.resizeObserver.observe(this.state.ref.current);
+    this.resizeObserver.observe(this.state.ref.current);
   }
 
 
@@ -54,7 +55,7 @@ class RecipeHeader extends Component {
     return (
       <div className="RecipeHeader" >
         <div className='header-logo' style={this.state.headerInlineStyle}></div>
-        <div className="header-text" ref={this.state.ref} onLoad={this.onLoad}>
+        <div className="header-text" ref={this.state.ref}>
           {this.props.recipe.name + " (" + this.props.recipe.version + ")"}
         </div>
       </div>

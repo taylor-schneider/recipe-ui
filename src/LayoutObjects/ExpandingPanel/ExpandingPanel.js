@@ -10,6 +10,8 @@ import { object } from 'prop-types';
 
 class ExpandingPanel extends ObserverComponent {
 
+  resizeObserver = null
+
   constructor(props){
     super(props)
 
@@ -25,13 +27,14 @@ class ExpandingPanel extends ObserverComponent {
       // The inline css attached to the component when header is resized
       headerHeight: 0,
       footerHeight: 0,
-      inlineCss: {}
+      inlineCss: {},
     }
 
     this.onTouchStart = this.onTouchStart.bind(this)
     this.onTouchMove = this.onTouchMove.bind(this)
     this.onTouchEnd = this.onTouchEnd.bind(this)
     this.onDoubleClick = this.onDoubleClick.bind(this)
+    this.observeUpdate = this.observeUpdate.bind(this)
   }
 
 
@@ -98,28 +101,32 @@ class ExpandingPanel extends ObserverComponent {
   
 
   observeUpdate(sender, state){
-//    console.log(sender,state)
-    if(sender instanceof  Header){
-      this.state.headerHeight = state.clientHeight
-    }
-    if(sender instanceof Footer){
-      this.state.footerHeight = state.clientHeight
-    }
-    let vh100 = window.innerHeight
-//    console.log(vh100)
-//    console.log(this.state.headerHeight)
-//    console.log(this.state.footerHeight)
 
-    let height = vh100 - this.state.headerHeight - this.state.footerHeight
-    this.state.inlineCss = {
-      top: this.state.headerHeight + "px",
-      height: height + "px"
+    // Pull out any information that is relevant
+    if(sender instanceof  Header){
+      this.setState({headerHeight: state.clientHeight})
     }
-//    console.log(this.state.inlineCss)
+    else if(sender instanceof Footer){
+      this.setState({footerHeight: state.clientHeight})
+    }
+    else {
+      return
+    }
+
+    // Update the inline css with the new values
+    let vh100 = window.innerHeight
+    let newHeight = vh100 - this.state.headerHeight - this.state.footerHeight
+
+    this.setState({
+      inlineCss: {
+        top: this.state.headerHeight + "px",
+        height: newHeight + "px"
+      }
+    })
+    console.log(this.state.inlineCss)
   }
 
   render(){
-//    console.log(this.state.inlineCss)
     return (
       <div 
         className={'ExpandingPanel ' + this.state.cssClass} 

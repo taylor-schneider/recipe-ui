@@ -16,7 +16,7 @@ class Header extends ObserverComponent {
     }
 
     this.scrollEventListener = this.scrollEventListener.bind(this)
-    this.resizeEventListender = this.resizeEventListender.bind(this)
+    this.resizeEventListender = this.resizeEventListener.bind(this)
   }
 
   // Define a callback function to dynamically set the css class 
@@ -50,18 +50,32 @@ class Header extends ObserverComponent {
 
   // Define a callback function to update observers if this component's
   // height changes
-  resizeEventListender() {
+  resizeEventListener() {
+    if(this.state === undefined){
+      return
+    }
     this.setState({clientHeight: this.state.ref.current.clientHeight})
     this.sendUpdate({clientHeight: this.state.ref.current.clientHeight})
   }
 
   componentDidMount(){
     window.addEventListener('scroll', this.scrollEventListener);
-    window.addEventListener('resize', this.resizeEventListender);
+    window.addEventListener('resize', this.resizeEventListener);
 
-    let currentHeight = this.state.ref.current.clientHeight
-    this.setState({clientHeight: currentHeight})
-    this.sendUpdate({clientHeight: currentHeight})
+    // We also need some magic to detect when the compnent itself resizes
+    // Note: There if text is longer than the screen, the component
+    // will change after the render...
+    //
+    // https://stackoverflow.com/questions/56941843/using-resizeobserver-in-react-class-component
+    this.state.resizeObserver = new ResizeObserver((entries) => {
+      this.resizeEventListener()
+
+    });
+    this.state.resizeObserver.observe(this.state.ref.current);
+
+    //let currentHeight = this.state.ref.current.clientHeight
+    //this.setState({clientHeight: currentHeight})
+    //this.sendUpdate({clientHeight: currentHeight})
   }
 
   render() {
