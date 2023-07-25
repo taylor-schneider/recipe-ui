@@ -70,22 +70,22 @@ class ExpandingPanel extends ObserverComponent {
   onDoubleClick(e) {
     
     // Check if we have had a click before
+    // If not, set the time (incase we have a follow up click) and return
     let now = Date.now()
     if (this.state.lastClickTime == null){
       this.setState({lastClickTime: now})
       return
     }
     // Check if this click is less than one second since the previous one
+    // If it's not, update the var and return
     else {
       let diff = (now - this.state.lastClickTime) / 1000
+      console.log(diff)
+
       let threshold = 0.5
-      if (diff < threshold){
+      if (diff > threshold){
         this.setState({lastClickTime: now})
-      }
-      else
-      {
-        console.log("too slow")
-        console.log(diff)
+        return
       }
     }
     // If we got here, its a double click...
@@ -97,6 +97,7 @@ class ExpandingPanel extends ObserverComponent {
       this.setState({cssClass: "ExpandingPanel-visible"})
     }
     this.setState({lastClickTime: null})
+    console.log("doubleclick")
   }
   
 
@@ -123,7 +124,6 @@ class ExpandingPanel extends ObserverComponent {
         height: newHeight + "px"
       }
     })
-    console.log(this.state.inlineCss)
   }
 
   render(){

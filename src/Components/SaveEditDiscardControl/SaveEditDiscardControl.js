@@ -7,10 +7,16 @@ const SaveEditDiscardControl = () => {
   const [editMode, setEditMode] = useState(false)
 
   const onEditButtonClick = (event) => {
+    // Prevent the button click from bubbling up to other controls
+    // Looking for click events
+    // https://stackoverflow.com/questions/38619981/how-can-i-prevent-event-bubbling-in-nested-react-components-on-click
+    event.nativeEvent.stopImmediatePropagation();
+
     setEditMode(true)
   };
 
   const onSaveButtonClick = (event) => {
+    event.nativeEvent.stopImmediatePropagation();
     let choseYes = window.confirm("Are you sure you want to save this as a new version?")
     if(choseYes){
       alert("Saved!")
@@ -19,6 +25,7 @@ const SaveEditDiscardControl = () => {
   };
 
   const onDiscardButtonClick = (event) => {
+    event.nativeEvent.stopImmediatePropagation();
     let choseYes = window.confirm("Are you sure you want to discard the changes and revert to the previous version?")
     if(choseYes){
       alert("Discarded!")
