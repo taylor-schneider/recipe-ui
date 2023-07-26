@@ -24,6 +24,8 @@ class SaveEditDiscardControl extends ObserverComponent {
     event.nativeEvent.stopImmediatePropagation();
 
     this.setState({editMode: true})
+
+    this.sendUpdate({editMode: true})
   };
 
   onSaveButtonClick(event){
@@ -33,6 +35,8 @@ class SaveEditDiscardControl extends ObserverComponent {
       alert("Saved!")
     }
     this.setState({editMode: false})
+
+    this.sendUpdate({editMode: false})
   };
 
   onDiscardButtonClick(event){
@@ -42,6 +46,8 @@ class SaveEditDiscardControl extends ObserverComponent {
       alert("Discarded!")
     }
     this.setState({editMode: false})
+
+    this.sendUpdate({editMode: false})
   };
 
   render(){

@@ -13,6 +13,7 @@ class ObserverComponent extends Component{
     }
 
     sendUpdate(state){
+        console.log("Sending update", state)
         observerMap.sendUpdate(this, state)
     }
 
